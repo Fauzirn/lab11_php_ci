@@ -20,7 +20,7 @@ Buka XAMPP, lalu pada bagian Apache klik **Config**, pilih **PHP.ini**. Untuk me
 
 #### C. Menjalankan CLI (Command Line Interface)
 Buka cmd/terminal, lalu arahkan pada direktori projek yang dibuat. Jalankan perintah untuk memanggil CLI Codeigniter:
-```php
+```CLI
     php spark
 ```
 ![Screenshot CLI Codeigniter](praktikum1/Screenshoot/ci2.png)
@@ -105,7 +105,7 @@ alamat: **http://localhost:8080/page/tos**
 
 #### H. Membuat View
 Buat file baru dengan nama **about.php** pada direktori view **(app/view/about.php)** kemudian isi kodenya seperti berikut.
-    ```php
+```php
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -118,10 +118,11 @@ Buat file baru dengan nama **about.php** pada direktori view **(app/view/about.p
         <p><?= $content; ?></p>
     </body>
     </html>
-    ```
+```
 Ubah **method about** pada class **Controller Page** menjadi seperti berikut:
+
 ```php
-public function about()
+    public function about()
     {
         return view('about', [
             'title' => 'Halaman About',
@@ -137,67 +138,65 @@ Pada Codeigniter 4 file yang menyimpan asset css dan javascript terletak pada di
 Kemudian buat folder template pada direktori view kemudian buat file **header.php** dan **footer.php**
 File **app/view/template/header.php**
 ```php
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <!-- Tambahkan di bagian head -->
-<meta name="csrf-token" content="<?= csrf_hash() ?>">
-    <title><?= $title; ?></title>
-    <link rel="stylesheet" href="<?= base_url('/style.css');?>">
-</head>
-<body>
-    <div id="container">
-    <header>
-        <h1>Layout Sederhana</h1>
-    </header>
-    <nav>
-        <a href="<?= base_url('/');?>" class="active">Home</a>
-        <a href="<?= base_url('/artikel');?>">Artikel</a>
-        <a href="<?= base_url('/about');?>">About</a>
-        <a href="<?= base_url('/contact');?>">Kontak</a>
-    </nav>
-    <section id="wrapper">
-        <section id="main">
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <!-- Tambahkan di bagian head -->
+    <meta name="csrf-token" content="<?= csrf_hash() ?>">
+        <title><?= $title; ?></title>
+        <link rel="stylesheet" href="<?= base_url('/style.css');?>">
+    </head>
+    <body>
+        <div id="container">
+        <header>
+            <h1>Layout Sederhana</h1>
+        </header>
+        <nav>
+            <a href="<?= base_url('/');?>" class="active">Home</a>
+            <a href="<?= base_url('/artikel');?>">Artikel</a>
+            <a href="<?= base_url('/about');?>">About</a>
+            <a href="<?= base_url('/contact');?>">Kontak</a>
+        </nav>
+        <section id="wrapper">
+            <section id="main">
 ```
 File **app/view/template/footer.php**
 ```php
-</section>
-        <aside id="sidebar">
-            <div class="widget-box">
-                <h3 class="title">Widget Header</h3>
-                <ul>
-                    <li><a href="#">Widget Link</a></li>
-                    <li><a href="#">Widget Link</a></li>
-                </ul>
-            </div>
-            <div class="widget-box">
-                <h3 class="title">Widget Text</h3>
-                <p>Vestibulum lorem elit, iaculis in nisl volutpat, malesuada tincidunt arcu. Proin in leo fringilla, vestibulum mi porta, faucibus felis. Integer pharetra est nunc, nec pretium nunc pretium ac.</p>
-            </div>
-        </aside>
     </section>
-    <footer>
-        <p>&copy; 2021 - Universitas Pelita Bangsa</p>
-    </footer>
-    </div>
-</body>
-</html>
+            <aside id="sidebar">
+                <div class="widget-box">
+                    <h3 class="title">Widget Header</h3>
+                    <ul>
+                        <li><a href="#">Widget Link</a></li>
+                        <li><a href="#">Widget Link</a></li>
+                    </ul>
+                </div>
+                <div class="widget-box">
+                    <h3 class="title">Widget Text</h3>
+                    <p>Vestibulum lorem elit, iaculis in nisl volutpat, malesuada tincidunt arcu. Proin in leo fringilla, vestibulum mi porta, faucibus felis. Integer pharetra est nunc, nec pretium nunc pretium ac.</p>
+                </div>
+            </aside>
+        </section>
+        <footer>
+            <p>&copy; 2021 - Universitas Pelita Bangsa</p>
+        </footer>
+        </div>
+    </body>
+    </html>
 ```
 Kemudian ubah file **app/view/about.php** seperti berikut.
 ```php
-<?= $this->include('template/header'); ?>
-<h1><?= $title; ?></h1>
-<hr>
-<p><?= $content; ?></p>
-<?= $this->include('template/footer'); ?>
+    <?= $this->include('template/header'); ?>
+    <h1><?= $title; ?></h1>
+    <hr>
+    <p><?= $content; ?></p>
+    <?= $this->include('template/footer'); ?>
 ```
 Selanjutnya refresh tampilan pada alamat **http://localhost:8080/about**
 ![Screenshot hal](praktikum1/Screenshoot/ci20.png)
 
-## Praktikum 2: Praktikum 2: Framework Lanjutan (CRUD)
-
-
+## Praktikum 2: Framework Lanjutan (CRUD)
 ### Langkah - langkah Praktikum
 #### A. Persiapan
 Untuk memulai membuat aplikasi CRUD sederhana, yang perlu disiapkan adalah database server menggunakan MySQL. Pastikan MySQL Server sudah dapat dijalankan melalui XAMPP.
@@ -511,31 +510,174 @@ Ujicoba file upload dengan mengakses menu tambah artikel.
 #### A.
 #### A.
 
-## Praktikum 7: View Layout dan View Cell
+## Praktikum 7: Relasi Tabel dan Query Builder
 ### Langkah-langkah Praktikum
-#### A.
-#### A.
-#### A.
-#### A.
+#### A. Membuat Tabel Kategori
+Kita akan membuat tabel baru bernama **kategori** untuk mengkategorikan artikel.
+Struktur Tabel **kategori**:
+![Screenshot hal](praktikum7/Screenshoot/7j.png)
 
-## Praktikum 8: View Layout dan View Cell
-### Langkah-langkah Praktikum
-#### A.
-#### A.
-#### A.
-#### A.
+Jalankan query berikut:
+```sql
+    CREATE TABLE kategori (
+            id_kategori INT(11) AUTO_INCREMENT,
+            nama_kategori VARCHAR(100) NOT NULL,
+            slug_kategori VARCHAR(100),
+            PRIMARY KEY (id_kategori)
+        );
+```
+![Screenshot hal](praktikum7/Screenshoot/7a.png)
 
-## Praktikum 9: View Layout dan View Cell
-### Langkah-langkah Praktikum
-#### A.
-#### A.
-#### A.
-#### A.
+#### B. Mengubah Tabel Artikel
+Tambahkan foreign key **id_kategori** pada tabel **artikel** untuk membuat relasi dengan tabel
+**kategori**.
+Query untuk menambahkan foreign key:
+```sql
+    ALTER TABLE artikel
+    ADD COLUMN id_kategori INT(11),
+    ADD CONSTRAINT fk_kategori_artikel
+    FOREIGN KEY (id_kategori) REFERENCES kategori(id_kategori);
+```
+![Screenshot hal](praktikum7/Screenshoot/7b.png)
 
-## Praktikum 10: View Layout dan View Cell
+#### C. Membuat Model Kategori
+Buat file model baru di **app/Models** dengan nama **KategoriModel.php**:
+![Screenshot hal](praktikum7/Screenshoot/7c.png)
+
+#### D. Memodifikasi Model Artikel
+Modifikasi **ArtikelModel.php** untuk mendefinisikan relasi dengan **KategoriModel**:
+![Screenshot hal](praktikum7/Screenshoot/7d.png)
+Menambahkan method `getArtikelDenganKategori()` untuk mengambil data artikel beserta
+nama kategorinya menggunakan join.
+
+#### E. Memodifikasi Controller Artikel
+Modifikasi **Artikel.php** untuk menggunakan model baru dan menampilkan data relasi:
+![Screenshot hal](praktikum7/Screenshoot/7e.png)
+
+#### F. Memodifikasi View
+Buka folder view/artikel sesuaikan masing-masing view. **index.php**
+![Screenshot hal](praktikum7/Screenshoot/7f.png)
+
+**admin_index.php**
+![Screenshot hal](praktikum7/Screenshoot/7g.png)
+
+**form_add.php**
+![Screenshot hal](praktikum7/Screenshoot/7h.png)
+
+**form_edit.php**
+![Screenshot hal](praktikum7/Screenshoot/7i.png)
+
+## Praktikum 8: AJAX
 ### Langkah-langkah Praktikum
-#### A.
-#### A.
-#### A.
-#### A.
+#### A. Menambahkan Pustaka jQuery
+Kita akan menggunakan pustaka jQuery untuk mempermudah proses AJAX. Download pustaka jQuery versi terbaru dari https://jquery.com dan ekstrak filenya.
+Salin file **jquery-3.6.0.min.js** ke folder **public/assets/js**.
+
+#### B. Membuat Model
+Pada modul sebelumnya sudah dibuat ArtikelModel, pada modul ini kita akan memanfaatkan model tersebut agar dapat diakses melalui AJAX.
+
+#### C. Membuat AJAX Controller
+![Screenshot hal](praktikum8/Screenshoot/8a.png)
+
+#### D. Membuat View
+![Screenshot hal](praktikum8/Screenshoot/8b.png)
+
+## Praktikum 9: Implementasi AJAX Pagination dan Search
+### Langkah-langkah Praktikum
+#### A. Persiapan 
+* Pastikan MySQL Server sudah berjalan.
+* Buka database **`lab_ci4`**.
+* Pastikan tabel **`artikel`** dan **`kategori`** sudah ada dan terisi data.
+* Pastikan library jQuery sudah terpasang atau dapat diakses melalui CDN.
+#### B. Modifikasi Controller Artikel
+Ubah method **`admin_index()`** di **`Artikel.php`** untuk mengembalikan data dalam format JSON jika request adalah AJAX. 
+![Screenshot hal](praktikum9/Screenshoot/9a.png)
+
+**Penjelasan:**
+• `$page = $this->request->getVar('page') ?? 1;`: Mendapatkan nomor
+halaman dari request. Jika tidak ada, default ke halaman 1.
+• `$builder->paginate(10, 'default', $page);`: Menerapkan pagination
+dengan nomor halaman yang diberikan.
+• `$this->request->isAJAX()`: Memeriksa apakah request yang datang adalah
+AJAX.
+• Jika AJAX, kembalikan data artikel dan pager dalam format JSON.
+• Jika bukan AJAX, tampilkan view seperti biasa.
+#### C. Modifikasi View (admin_index.php)
+* Ubah view **`admin_index.php`** untuk menggunakan jQuery.
+* Hapus kode yang menampilkan tabel artikel dan pagination secara langsung.
+* Tambahkan elemen untuk menampilkan data artikel dan pagination dari AJAX.
+* Tambahkan kode jQuery untuk melakukan request AJAX.
+![Screenshot hal](praktikum8/Screenshoot/9b.png)
+
+## Praktikum 10: API
+### Langkah-langkah Praktikum
+#### A. Persiapan
+Persiapan awal adalah mengunduh aplikasi REST Client, ada banyak aplikasi yang dapat digunakan untuk keperluan tersebut. Salah satunya adalah Postman. Postman – Merupakan aplikasi yang berfungsi sebagai REST Client, digunakan untuk testing REST API. Unduh aplikasi Postman dari tautan berikut:
+https://www.postman.com/downloads/
+#### B. Membuat Model
+Pada modul sebelumnya sudah dibuat ArtikelModel, pada modul ini kita akan memanfaatkan model tersebut agar dapat diakses melalui API.
+#### C. Membuat REST Controller
+Pada tahap ini, kita akan membuat file REST Controller yang berisi fungsi untuk menampilkan,
+menambah, mengubah dan menghapus data. Masuklah ke direktori **app\Controllers** dan buatlah file
+baru bernama **Post.php**. Kemudian, salin kode di bawah ini ke dalam file tersebut:
+![Screenshot hal](praktikum10/Screenshoot/10a.png)
+
+Kode diatas berisi 5 method, yaitu:
+• **index()** – Berfungsi untuk menampilkan seluruh data pada database.
+• **create()** – Berfungsi untuk menambahkan data baru ke database.
+• **show()** – Berfungsi untuk menampilkan suatu data spesifik dari database.
+• **update()** – Berfungsi untuk mengubah suatu data pada database.
+• **delete()** – Berfungsi untuk menghapus data dari database.
+
+#### D. Membuat Routing REST API
+Untuk mengakses REST API CodeIgniter, kita perlu mendefinisikan route-nya terlebih dulu.
+Caranya, masuklah ke direktori **app/Config** dan bukalah file **Routes.php**. Tambahkan kode di bawah ini:
+```php
+    $routes->resource('post');
+```
+Untuk mengecek route nya jalankan perintah berikut:
+```CLI
+    php spark routes
+```
+Selanjutnya akan muncul daftar route yang telah dibuat.
+![Screenshot hal](praktikum10/Screenshoot/10k.png)
+
+#### E.Testing REST API CodeIgniter
+Buka aplikasi postman dan pilih create new → HTTP Request
+![Screenshot hal](praktikum10/Screenshoot/10d.png)
+
+#### F. Menampilkan Semua Data
+Pilih method **GET** dan masukkan URL berikut: http://localhost:8080/post.
+Lalu, klik Send. Jika hasil test menampilkan semua data artikel dari database, maka pengujian berhasil.
+![Screenshot hal](praktikum10/Screenshoot/10e.png)
+
+#### G. Menampilkan Data Spesifik
+Masih menggunakan method **GET**, hanya perlu menambahkan ID artikel di belakang URL
+seperti ini:
+http://localhost:8080/post/2
+Selanjutnya, klik **Send**. Request tersebut akan menampilkan data artikel yang memiliki ID nomor **2** di database.
+![Screenshot hal](praktikum10/Screenshoot/10g.png)
+
+#### H. Mengubah Data
+Untuk mengubah data, silakan ganti method menjadi **PUT**. Kemudian, masukkan URL artikel
+yang ingin diubah. Misalnya, ingin mengubah data artikel dengan ID nomor 2, maka masukkan
+URL berikut:
+http://localhost:8080/post/2
+
+Selanjutnya, pilih tab **Body**. Kemudian, pilih **x-www-form-uriencoded**. Masukkan nama atribut tabel pada kolom **KEY** dan nilai data yang baru pada kolom **VALUE**. Kalau sudah, klik **Send**.
+![Screenshot hal](praktikum10/Screenshoot/10h.png)
+
+#### I. Menambahkan Data
+Anda perlu menggunakan method **POST** untuk menambahkan data baru ke database. Kemudian, masukkan URL berikut:
+http://localhost:8080/post
+Pilih tab **Body**, lalu pilih **x-www-form-uriencoded**. Masukkan atribut tabel pada kolom **KEY** dan nilai data baru di kolom **VALUE**. Jangan lupa, klik **Send**.
+![Screenshot hal](praktikum10/Screenshoot/10i.png)
+
+#### J. Menghapus Data
+Pilih method **DELETE** untuk menghapus data. Lalu, masukkan URL spesifik data mana yang ingin di hapus. Misalnya, ingin menghapus data nomor 4, maka URL-nya seperti ini:
+http://localhost:8080/post/7
+
+Langsung saja klik **Send**, maka akan mendapatkan pesan bahwa data telah berhasil dihapus dari database.
+![Screenshot hal](praktikum10/Screenshoot/10j.png)
+
 
