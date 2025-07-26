@@ -6,28 +6,33 @@ class Page extends BaseController
 {
     public function about()
     {
-        $data = [
+        return view('about', [
             'title' => 'Halaman About',
-            'content' => 'Ini adalah halaman About yang menjelaskan tentang halaman ini.'
-        ];
-        return view('content', $data);
+            'content' => 'Ini adalah halaman about yang menjelaskan tentang isi halaman ini.'
+        ]);
     }
 
-    public function artikel()
+    public function contact()
     {
-        $data = [
-            'title' => 'Halaman Artikel',
-            'content' => 'Ini adalah halaman Artikel yang berisi kumpulan artikel menarik.'
-        ];
-        return view('content', $data);
+        return view('contact', [
+            'title' => 'Halaman Contact',
+            'content' => 'Ini adalah halaman contact yang berisi informasi kontak.'
+        ]);
     }
 
-    public function kontak()
+    public function faqs()
     {
-        $data = [
-            'title' => 'Halaman Kontak',
-            'content' => 'Ini adalah halaman Kontak. Silakan hubungi kami di email@example.com.'
-        ];
-        return view('content', $data);
+        return view('faqs', [
+            'title' => 'Halaman FAQ',
+            'content' => 'Ini adalah halaman FAQ yang berisi pertanyaan yang sering diajukan.'
+        ]);
+    }
+    
+    public function tos()
+    {
+        return view('tos', [
+            'title' => 'Halaman Terms of Service',
+            'content' => 'Ini adalah halaman Terms of Service yang berisi ketentuan penggunaan layanan.'
+        ]);
     }
 }

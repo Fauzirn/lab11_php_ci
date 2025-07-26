@@ -21,7 +21,7 @@ $routes->setDefaultController('Home'); // Controller default jika tidak ada URI
 $routes->setDefaultMethod('index');    // Method default jika tidak ada method di URI
 $routes->setTranslateURIDashes(false); // Apakah tanda '-' di URI diterjemahkan menjadi '_'
 $routes->set404Override();             // Override halaman 404 (bisa diisi controller/method khusus)
-$routes->setAutoRoute(true);           // Mengaktifkan auto routing (boleh diaktifkan atau dimatikan)
+$routes->setAutoRoute(false);           // Mengaktifkan auto routing (boleh diaktifkan atau dimatikan)
 
 /**
  * --------------------------------------------------------------------
@@ -29,11 +29,50 @@ $routes->setAutoRoute(true);           // Mengaktifkan auto routing (boleh diakt
  * --------------------------------------------------------------------
  */
 
-// Route default, biasanya mengarah ke Home controller
+// Route untuk halaman utama
 $routes->get('/', 'Home::index');
 $routes->get('/about', 'Page::about');
-$routes->get('/artikel', 'Page::artikel');
-$routes->get('/contact', 'Page::kontak');
+$routes->get('/contact', 'Page::contact');
+
+// Route untuk artikel publik
+$routes->get('/artikel', 'Artikel::index');
+$routes->get('/artikel/(:any)', 'Artikel::view/$1');
+
+// Route untuk kategori
+$routes->get('/kategori/(:segment)', 'Artikel::kategori/$1');
+
+// Routes untuk AJAX
+$routes->get('artikel', 'Artikel::index');
+$routes->get('artikel/ajaxList', 'Artikel::ajaxList');
+$routes->get('/ajax', 'AjaxController::index');
+$routes->get('/ajax/getData', 'AjaxController::getData');
+$routes->get('/ajax/getById/(:num)', 'AjaxController::getById/$1');
+$routes->post('/ajax/save', 'AjaxController::save');
+$routes->delete('/ajax/delete/(:num)', 'AjaxController::delete/$1');
+
+// Route untuk user
+$routes->match(['get', 'post'], 'user/register', 'User::register');
+$routes->get('/user/login', 'User::login');
+$routes->post('/user/login', 'User::login');
+$routes->get('/user/logout', 'User::logout');
+
+
+// Route untuk admin dengan filter auth
+$routes->group('admin', ['filter' => 'auth'], function ($routes) {
+    $routes->get('dashboard', 'User::dashboard');
+    $routes->get('artikel', 'Artikel::admin_index');
+    $routes->get('artikel/add', 'Artikel::add');
+    $routes->post('artikel/add', 'Artikel::add');
+    $routes->get('artikel/edit/(:num)', 'Artikel::edit/$1');
+    $routes->post('artikel/edit/(:num)', 'Artikel::edit/$1');
+    $routes->get('artikel/delete/(:num)', 'Artikel::delete/$1');
+});
+
+if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
+    require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+}
+// Route untuk API
+
 //$routes->get('/tos', 'Pages::tos');
 
 /**
